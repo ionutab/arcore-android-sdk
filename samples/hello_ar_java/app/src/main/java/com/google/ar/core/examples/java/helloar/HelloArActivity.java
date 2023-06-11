@@ -158,6 +158,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
   private Shader virtualObjectShader;
   private Texture virtualObjectAlbedoTexture;
   private Texture virtualObjectAlbedoInstantPlacementTexture;
+  private Texture virtualObjectPaperTexture;
 
   private final List<WrappedAnchor> wrappedAnchors = new ArrayList<>();
 
@@ -400,23 +401,29 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
       virtualObjectAlbedoTexture =
           Texture.createFromAsset(
               render,
-              "models/pawn_albedo.png",
+                  "models/rect-texture-lorem-ipsum.png",
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.SRGB);
       virtualObjectAlbedoInstantPlacementTexture =
           Texture.createFromAsset(
               render,
-              "models/pawn_albedo_instant_placement.png",
+                  "models/rect-texture-lorem-ipsum.png",
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.SRGB);
+      virtualObjectPaperTexture =
+              Texture.createFromAsset(
+                      render,
+                      "models/rect-texture-lorem-ipsum.png",
+                      Texture.WrapMode.CLAMP_TO_EDGE,
+                      Texture.ColorFormat.SRGB);
       Texture virtualObjectPbrTexture =
           Texture.createFromAsset(
               render,
-              "models/pawn_roughness_metallic_ao.png",
+                  "models/rect-texture-lorem-ipsum.png",
               Texture.WrapMode.CLAMP_TO_EDGE,
               Texture.ColorFormat.LINEAR);
 
-      virtualObjectMesh = Mesh.createFromAsset(render, "models/pawn.obj");
+      virtualObjectMesh = Mesh.createFromAsset(render, "models/rect.obj");
       virtualObjectShader =
           Shader.createFromAssets(
                   render,
@@ -602,7 +609,7 @@ public class HelloArActivity extends AppCompatActivity implements SampleRender.R
           && ((InstantPlacementPoint) trackable).getTrackingMethod()
               == InstantPlacementPoint.TrackingMethod.SCREENSPACE_WITH_APPROXIMATE_DISTANCE) {
         virtualObjectShader.setTexture(
-            "u_AlbedoTexture", virtualObjectAlbedoInstantPlacementTexture);
+            "u_AlbedoTexture", virtualObjectPaperTexture);
       } else {
         virtualObjectShader.setTexture("u_AlbedoTexture", virtualObjectAlbedoTexture);
       }
